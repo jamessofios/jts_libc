@@ -31,9 +31,9 @@ https://chromium.googlesource.com/chromiumos/docs/+/master/constants/syscalls.md
 void jts_exit(int code);
 int jts_close(int fd);
 int jts_open(char *filename, int flags, umode_t mode);
-long jts_read(int fd, void *buf, unsigned long count);
-long jts_write(int fd, const void *buf, unsigned long count);
-unsigned long jts_strlen(char *s);
-unsigned long jts_true(void);
-unsigned long jts_false(void);
+intmax_t jts_read(int fd, void *buf, uintmax_t count);
+intmax_t jts_write(int fd, const void *buf, uintmax_t count);
+uintmax_t jts_strlen(char *s);
+uintmax_t jts_true(void);
+uintmax_t jts_false(void);
 void jts_nop(void);
