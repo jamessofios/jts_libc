@@ -21,6 +21,10 @@
 #define O_APPEND	00002000
 #define O_NONBLOCK	00004000
 
+#define STDIN 0
+#define STDOUT 1
+#define STDERR 2
+
 // typedefs for glibc compat
 typedef unsigned short umode_t;
 
