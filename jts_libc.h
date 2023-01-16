@@ -41,3 +41,4 @@ uintmax_t jts_strlen(char *s);
 uintmax_t jts_true(void);
 uintmax_t jts_false(void);
 void jts_nop(void);
+int jts_strcmp(char*,char*);
