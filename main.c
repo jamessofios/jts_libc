@@ -35,6 +35,9 @@ int main(int argc, char **argv)
 	jts_nop();
 
 	jts_close(fd);
+
+	jts_strcmp("Hi", "Hi");
+
 	jts_exit(jts_strlen("Hi"));
 
 	return 0;
