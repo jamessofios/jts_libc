@@ -36,7 +36,23 @@ int main(int argc, char **argv)
 
 	jts_close(fd);
 
-	jts_strcmp("Hi", "Hi");
+	if (jts_strcmp("Hi", "Hi") == 0) {
+		c = 'Z';
+		jts_write(STDOUT, &c, 1);
+	}
+
+	if (jts_strcmp("Him", "Hi") == 1) {
+		c = 'O';
+		jts_write(STDOUT, &c, 1);
+	}
+
+	if (jts_strcmp("Hi", "Him") == -1) {
+		c = 'N';
+		jts_write(STDOUT, &c, 1);
+	}
+
+	c = '\n';
+	jts_write(STDOUT, &c, 1);
 
 	jts_exit(jts_strlen("Hi"));
 
