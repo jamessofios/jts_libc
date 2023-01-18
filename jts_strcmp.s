@@ -16,41 +16,41 @@ return >0 if str2 is less than str1
 return <0 if str1 is less than str2
 */
 
-exit_1:
-	movq $-1, %rax
-	ret
-exit_2:
-	movq $1, %rax
-	ret
-exit_0:
-	xor %rax, %rax
-	ret
-
 jts_strcmp:
-	xor %rax, %rax
 	loop:
 		movq (%rdi), %r8
 		movq (%rsi), %r9
 
 		// str1 != NULL
 		cmpb $0, (%rdi)
-		je exit_1
+		je set_return_n1
 
 		// str2 != NULL
 		cmpb $0, (%rsi)
-		je exit_2
+		je set_return_1
 
 		// str2 > str1 ?
 		cmp %r8, %r9
-		jg exit_2
+		jg set_return_1
 
 		// str1 > str2 ?
-		jl exit_1
+		jl set_return_n1
 
 		// str1 == str2
-		je exit_0
+		je set_return_0
 
 		inc %rdi
 		inc %rsi
 
 		jmp loop
+set_return_n1:
+	movq $-1, %rax
+	jmp exit
+set_return_1:
+	movq $1, %rax
+	jmp exit
+set_return_0:
+	xor %rax, %rax
+	jmp exit
+exit:
+	ret
