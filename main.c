@@ -54,6 +54,12 @@ int main(int argc, char **argv)
 	c = '\n';
 	jts_write(STDOUT, &c, 1);
 
+	jts_memset(&c, 'M', 1);
+	jts_write(STDOUT, &c, 1);
+
+	c = '\n';
+	jts_write(STDOUT, &c, 1);
+
 	jts_exit(jts_strlen("Hi"));
 
 	return 0;
