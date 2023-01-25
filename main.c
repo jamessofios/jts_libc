@@ -60,6 +60,16 @@ int main(int argc, char **argv)
 	c = '\n';
 	jts_write(STDOUT, &c, 1);
 
+
+	char *vptr = jts_malloc(1);
+
+	*vptr = 'V';
+//
+//	jts_write(STDOUT, vptr, 1);
+
+	jts_free(vptr, 1);
+
+
 	jts_exit(jts_strlen("Hi"));
 
 	return 0;
