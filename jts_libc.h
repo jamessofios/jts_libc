@@ -43,3 +43,6 @@ uintmax_t jts_false(void);
 void jts_nop(void);
 int jts_strcmp(char*,char*);
 void *jts_memset(void *str, int c, size_t n);
+
+void *jts_malloc(size_t size);
+void jts_free(void *ptr, size_t size);
