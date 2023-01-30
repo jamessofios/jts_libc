@@ -9,7 +9,7 @@
 #include <stdnoreturn.h>
 #include <stdbool.h>
 
-// defines are taken from: /usr/include/asm-generic/fcntl.h
+// open() flag macros. defines are taken from: /usr/include/asm-generic/fcntl.h
 #define O_ACCMODE	00000003
 #define O_RDONLY	00000000
 #define O_WRONLY	00000001
@@ -21,6 +21,25 @@
 #define O_APPEND	00002000
 #define O_NONBLOCK	00004000
 
+// mmap flag macros
+#define PROT_READ        0x1                /* Page can be read.  */
+#define PROT_WRITE        0x2                /* Page can be written.  */
+#define PROT_EXEC        0x4                /* Page can be executed.  */
+#define PROT_NONE        0x0                /* Page can not be accessed.  */
+#define PROT_GROWSDOWN        0x01000000        /* Extend change to start of
+                                           growsdown vma (mprotect only).  */
+#define PROT_GROWSUP        0x02000000        /* Extend change to start of
+                                           growsup vma (mprotect only).  */
+
+/* Sharing types (must choose one and only one of these).  */
+#define MAP_SHARED 0x01                /* Share changes.  */
+#define MAP_PRIVATE 0x02                /* Changes are private.  */
+
+#define MAP_ANONYMOUS 0x20                /* Don't use a file.  */
+#define MAP_ANON MAP_ANONYMOUS
+// end mmap macros
+
+// fd const macros
 #define STDIN 0
 #define STDOUT 1
 #define STDERR 2
@@ -44,5 +63,7 @@ void jts_nop(void);
 int jts_strcmp(char*,char*);
 void *jts_memset(void *str, int c, size_t n);
 
-void *jts_malloc(size_t size);
-void jts_free(void *ptr, size_t size);
+// typedef for mmap
+typedef long int off_t;
+void *jts_mmap(void *addr, size_t length, int prot, int flags, int fd, off_t offset);
+int jts_munmap(void *addr, size_t length);
