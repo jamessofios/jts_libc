@@ -61,13 +61,13 @@ int main(int argc, char **argv)
 	jts_write(STDOUT, &c, 1);
 
 
-	char *vptr = jts_malloc(1);
+	char *vptr = jts_mmap(0, 1, PROT_READ | PROT_WRITE, MAP_SHARED | MAP_ANON, -1, 0);
 
 	*vptr = 'V';
-//
-//	jts_write(STDOUT, vptr, 1);
 
-	jts_free(vptr, 1);
+	jts_write(STDOUT, vptr, 1);
+
+	jts_munmap(vptr, 1);
 
 
 	jts_exit(jts_strlen("Hi"));
