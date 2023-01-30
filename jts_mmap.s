@@ -28,56 +28,52 @@ https://sites.uclouvain.be/SystInfo/usr/include/bits/mman.h.html
 
 
 
-.global jts_malloc
-.global jts_free
+.global jts_mmap
+.global jts_munmap
 
 .text
-	// void *malloc(size_t size);
-	jts_malloc:
-		// make sure size is gt zero
-		cmpq $0, %rdi
-		je set_null
+	// void *mmap(void *addr, size_t length, int prot, int flags, int fd, off_t offset);
+	jts_mmap:
+//		// make sure size is gt zero
+//		cmpq $0, %rdi
+//		je set_null
+//
+//		// set len
+//		movq %rdi, %rsi
+//
+//		// set addr preference. Zero is no preference
+//		movq $0, %rdi
+//
+//		// set prot to read and write
+//		movq $3, %rdx
+//
+//		// set flags to shared and private
+//		mov $34, %r10
+//
+//		// set fd to no file
+//		movq $-1, %r8
+//
+//		// zero offset
+//		movq $0, %r9
+//		call sys_mmap
 
-		// set len
-		movq %rdi, %rsi
+			sys_mmap:
+				movq %rcx, %r10
+				movq $9, %rax
+				syscall
+				ret
+//		ret
 
-		// set addr preference. Zero is no preference
-		movq $0, %rdi
-
-		// set prot to read and write
-		movq $3, %rdx
-
-		// set flags to shared and private
-		mov $34, %r10
-
-		// set fd to no file
-		movq $-1, %r8
-
-		// zero offset
-		movq $0, %r9
-		call sys_mmap
-
-		ret
-
-	// void free(void *ptr, size_t size);
-	jts_free:
+	// int munmap(void *addr, size_t length);
+	jts_munmap:
 		// Make sure the arguents are not zero or null before munmapping
-		cmpq $0, %rdi
-		je set_null
-		cmpq $0, %rsi
-		je set_null
-
-		call sys_munmap
-		ret
-	sys_mmap:
-		movq $9, %rax
-		syscall
-		ret
-	sys_munmap:
-		movq $11, %rax
-		syscall
-		ret
-	set_null:
-		xor %rax, %rax
-		ret
-
+//		cmpq $0, %rdi
+//		je set_null
+//		cmpq $0, %rsi
+//		je set_null
+//		call sys_munmap
+			sys_munmap:
+			movq $11, %rax
+			syscall
+			ret
+//		ret
